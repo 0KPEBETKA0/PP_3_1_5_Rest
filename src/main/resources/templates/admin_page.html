@@ -3,14 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"-->
-<!--          rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"-->
-<!--          crossorigin="anonymous">-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"-->
-<!--            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"-->
-<!--            crossorigin="anonymous"></script>-->
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -38,9 +30,9 @@
 
 <div class="d-flex align-items-start">
     <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active" id="btnAdminPanel" data-bs-toggle="pill" href="#v-pills-admin" role="tab"
+        <a class="nav-link active" id="btnAdminPanel" data-toggle="pill" href="#v-pills-admin" role="tab"
            aria-controls="v-pills-admin" aria-selected="true">Admin</a>
-        <a class="nav-link" id="v-pills-user-tab" data-bs-toggle="pill" href="#v-pills-user" role="tab"
+        <a class="nav-link" id="v-pills-user-tab" data-toggle="pill" href="#v-pills-user" role="tab"
            aria-controls="v-pills-user" aria-selected="false">User</a>
     </div>
 
@@ -84,75 +76,67 @@
                     </div>
 
                     <!-- Modal edit -->
+
                     <div class="modal fade" id="modalEdit"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" modal-dialog-centered>
+                        <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="editModalLabel">Edit user</h5>
-                                    <button type="button" class="close"
-                                            data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <form>
                                     <div class="modal-body text-center">
                                         <div class="col-md-6 mx-auto">
-<!--                                            <div class="controls">-->
-<!--                                                <p>-->
-<!--                                                    <label for="idEditUser">-->
-<!--                                                        <strong>ID</strong>-->
-<!--                                                        <input id="idEditUser" class="form-control"-->
-<!--                                                               type="number" disabled>-->
-<!--                                                    </label>-->
-<!--                                                </p>-->
-<!--                                                <p>-->
-<!--                                                    <label for="editUsername">-->
-<!--                                                        <strong>Username</strong>-->
-<!--                                                        <input id="editUsername" class="form-control"-->
-<!--                                                               type="text" placeholder="Username"-->
-<!--                                                               required>-->
-<!--                                                    </label>-->
-<!--                                                </p>-->
-<!--                                                <p>-->
-<!--                                                    <label for="editName">-->
-<!--                                                        <strong>Name</strong>-->
-<!--                                                        <input id="editName" class="form-control"-->
-<!--                                                               type="text" placeholder="Name"-->
-<!--                                                               required>-->
-<!--                                                    </label>-->
-<!--                                                </p>-->
-<!--                                                <p>-->
-<!--                                                    <label for="editLastname">-->
-<!--                                                        <strong>Lastname</strong>-->
-<!--                                                        <input id="editLastname" class="form-control"-->
-<!--                                                               type="text" placeholder="Lastname"-->
-<!--                                                               required>-->
-<!--                                                    </label>-->
-<!--                                                </p>-->
-<!--                                                <label class="container-fluid col-6"-->
-<!--                                                       for="editUserRoles">-->
-<!--                                                    <strong>Role</strong>-->
-<!--                                                    <select id="editUserRoles" class="form-select"-->
-<!--                                                            multiple size="2">-->
-<!--                                                    </select>-->
-<!--                                                </label>-->
-<!--                                            </div>-->
-                                            <br>
-                                            <label for="EditUsername"><b>Username</b></label>
-                                            <input id="EditUsername" type="text" class="form-control"/>
-                                            <br>
-                                            <label for="editName"><b>Name</b></label>
-                                            <input id="editName" type="text" class="form-control"/>
-                                            <br>
-                                            <label for="editLastname"><b>Lastname</b></label>
-                                            <input id="editLastname" type="text" class="form-control"/>
-                                            <br>
-                                            <label for="editUserRoles"><b>Role</b></label>
-                                            <select id="editUserRoles" class="custom-select form-control"
-                                                    size="2" multiple required>
-                                            </select>
-                                            <br><br>
+                                            <div class="controls">
+                                                <p>
+                                                    <label for="idEditUser">
+                                                        <strong>ID</strong>
+                                                        <input id="idEditUser" class="form-control"
+                                                               type="number" disabled>
+                                                    </label>
+                                                </p>
+                                                <p>
+                                                    <label for="editUsername">
+                                                        <strong>Username</strong>
+                                                        <input id="editUsername" class="form-control"
+                                                               type="text" placeholder="Username"
+                                                               required>
+                                                    </label>
+                                                </p>
+                                                <p>
+                                                    <label for="editName">
+                                                        <strong>Name</strong>
+                                                        <input id="editName" class="form-control"
+                                                               type="text" placeholder="Name"
+                                                               required>
+                                                    </label>
+                                                </p>
+                                                <p>
+                                                    <label for="editLastname">
+                                                        <strong>Lastname</strong>
+                                                        <input id="editLastname" class="form-control"
+                                                               type="text" placeholder="Lastname"
+                                                               required>
+                                                    </label>
+                                                </p>
+                                                    <label for="editPassword">
+                                                        <strong>Password</strong>
+                                                        <input id="editPassword" class="form-control"
+                                                               type="text" placeholder="Password"
+                                                               required>
+                                                    </label>
+                                                </p>
+                                                <label class="container-fluid col-6"
+                                                       for="editUserRoles">
+                                                    <strong>Role</strong>
+                                                    <select id="editUserRoles" class="form-select"
+                                                            multiple size="2">
+                                                    </select>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -169,15 +153,14 @@
                     </div>
 
                     <!-- Modal delete-->
-                    <div class="modal fade" id="modalDelete" tabindex="-1"
+                    <div class="modal fade" id="modalDelete"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
+                        <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="deleteModalLabel">Delete user</h5>
-                                    <button type="button" class="btn-close"
-                                            data-bs-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close"><span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <form>
@@ -227,7 +210,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">close
+                                                data-dismiss="modal">close
                                         </button>
                                         <button type="submit" class="btn btn-danger"
                                                 aria-pressed="true">Delete

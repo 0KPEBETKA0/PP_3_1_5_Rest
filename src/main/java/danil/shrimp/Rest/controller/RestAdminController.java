@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import danil.shrimp.Rest.model.User;
-import danil.shrimp.Rest.service.RoleService;
 import danil.shrimp.Rest.service.UsersService;
 
 import javax.validation.Valid;
@@ -21,12 +20,10 @@ import java.util.List;
 public class RestAdminController {
 
     private final UsersService usersService;
-    private final RoleService roleService;
 
     @Autowired
-    public RestAdminController(UsersService usersService, RoleService roleService) {
+    public RestAdminController(UsersService usersService) {
         this.usersService = usersService;
-        this.roleService = roleService;
     }
 
     @GetMapping()
@@ -59,13 +56,13 @@ public class RestAdminController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PutMapping("/admin")
-    public ResponseEntity<HttpStatus> editUser (@RequestBody User user, @PathVariable("id") Long id) {
-        usersService.updateUser(id, user);
+    @PatchMapping()
+    public ResponseEntity<HttpStatus> editUser (@RequestBody User user) {
+        usersService.updateUser(user);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @DeleteMapping("/admin/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
         usersService.removeUserById(id);
         return ResponseEntity.ok(HttpStatus.OK);

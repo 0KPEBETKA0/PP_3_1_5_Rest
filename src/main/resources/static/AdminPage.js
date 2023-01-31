@@ -1,5 +1,5 @@
 const url = '/api/admin/'
-const dbRoles = [{id: 1, name: "ROLE_USER"}, {id: 2, name: "ROLE_ADMIN"}]
+const dbRoles = [{id: 1, name: "ROLE_ADMIN"}, {id: 2, name: "ROLE_USER"}]
 
 const showNavbarInfo = (user) => {
     document.getElementById("top-panel").innerHTML =
@@ -13,7 +13,8 @@ fetch('api/user/')
 let usersInfo = ''
 const showUsers = (users) => {
     const container = document.getElementById("tbody-admin")
-    users.forEach(user => {
+    const arr = Array.from(users)
+    arr.forEach(user => {
         usersInfo += `
         <tr>
             <td>${user.id}</td>
@@ -21,8 +22,12 @@ const showUsers = (users) => {
             <td>${user.name}</td>
             <td>${user.lastname}</td>
             <td>${user.rolesToString}</td>
-            <td class="text text-white"><a class="btnEdit btn btn-info">Edit</a></td>
-            <td class="text text-white"><a class="btnDelete btn btn-danger">Delete</a></td>
+            <td class="text text-white">
+                <a class="btnEdit btn btn-info">Edit</a>
+            </td>
+            <td class="text text-white">
+                <a class="btnDelete btn btn-danger">Delete</a>
+            </td>
         </tr>
         `
     })
@@ -45,15 +50,15 @@ const reloadShowUsers = () => {
 let userInfo = ''
 const showUser = (user) => {
     const container = document.getElementById("tbody-user-info")
-        userInfo +=`
+    userInfo += `
         <tr>
             <td>${user.id}</td>
             <td>${user.username}</td>
             <td>${user.name}</td>
             <td>${user.lastname}</td>
-            <td>${user.role}</td>
+            <td>${user.rolesToString}</td>
         </tr>`
-    container.innerHTML = usersInfo
+    container.innerHTML = userInfo
 }
 fetch('api/user/')
     .then(response => response.json())
@@ -102,7 +107,7 @@ formNew.addEventListener('submit', (e) => {
             roles: listRoles
         })
     })
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => showUsers(data))
         .catch(error => console.log(error))
         .then(reloadShowUsers)
@@ -112,21 +117,24 @@ formNew.addEventListener('submit', (e) => {
 // Edit modal
 const modalEdit = new bootstrap.Modal(document.getElementById('modalEdit'))
 const editForm = document.getElementById('modalEdit')
+const idEdit = document.getElementById('idEditUser')
 const usernameEdit = document.getElementById('editUsername')
 const nameEdit = document.getElementById('editName')
 const lastnameEdit = document.getElementById('editLastname')
+const passwordEdit = document.getElementById('editPassword')
 const rolesEdit = document.getElementById('editUserRoles')
 
 const on = (element, event, selector, handler) => {
     element.addEventListener(event, e => {
         if (e.target.closest(selector)) {
+            console.log("btnEditClick")
             handler(e)
         }
     })
 }
 
 let idForm = 0
-on(document, 'click', 'btnEdit', e => {
+on(document, 'click', '.btnEdit', e => {
     const row = e.target.parentNode.parentNode
     idForm = row.firstElementChild.innerHTML
     fetch(url + idForm, {
@@ -136,9 +144,11 @@ on(document, 'click', 'btnEdit', e => {
         .then(data => getUserById(data))
         .catch(error => console.log(error))
     const getUserById = (user) => {
+        idEdit.value = user.id
         usernameEdit.value = user.username
         nameEdit.value = user.name
         lastnameEdit.value = user.lastname
+        passwordEdit.value = ''
         rolesEdit.innerHTML = `
             <option value="${dbRoles[0].id}">${dbRoles[0].name}</option>
             <option value="${dbRoles[1].id}">${dbRoles[1].name}</option>
@@ -167,10 +177,11 @@ editForm.addEventListener('submit', (e) => {
             username: usernameEdit.value,
             name: nameEdit.value,
             lastname: lastnameEdit.value,
+            password: passwordEdit.value,
             roles: listRoles
         })
     })
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => showUsers(data))
         .catch(error => console.log(error))
         .then(reloadShowUsers)
@@ -186,7 +197,7 @@ const nameDelete = document.getElementById('nameDeleteUser')
 const lastnameDelete = document.getElementById('lastnameDeleteUser')
 const rolesDelete = document.getElementById('deleteUserRoles')
 
-on(document, 'click', 'btnDelete', e => {
+on(document, 'click', '.btnDelete', e => {
     const row = e.target.parentNode.parentNode
     idForm = row.firstElementChild.innerHTML
     fetch(url + idForm, {
@@ -227,7 +238,7 @@ deleteForm.addEventListener('submit', (e) => {
 })
 
 let roleArray = (options) => {
-    let array =[]
+    let array = []
     for (let i = 0; i < options.length; i++) {
         if (options[i].selected) {
             let role = {id: options[i].value}

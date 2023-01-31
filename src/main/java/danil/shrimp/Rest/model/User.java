@@ -3,11 +3,9 @@ package danil.shrimp.Rest.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -22,22 +20,18 @@ public class User implements UserDetails {
     private Long id;
 
     @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2, max = 30, message = "Name should not be between 2 and 30 characters")
     private String name;
 
     @NotEmpty(message = "Lastname should not be empty")
-    @Size(min = 2, max = 30, message = "Name should not be between 2 and 30 characters")
     private String lastname;
 
     @NotEmpty(message = "Username should not be empty")
-    @Size(min = 2, max = 30, message = "Name should not be between 2 and 30 characters")
     private String username;
 
     @NotEmpty(message = "Password should not be empty")
-    @Size(min = 2)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
